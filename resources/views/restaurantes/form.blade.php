@@ -25,6 +25,12 @@
         <flux:error name="direccion" />
     </flux:field>
 
+    <flux:field>
+        <flux:label>{{ __('Imagen') }}</flux:label>
+        <flux:input name="imagen" value="{{ old('imagen', $restaurante->imagen ?? '') }}" />
+        <flux:error name="imagen" />
+    </flux:field>
+
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <flux:field>
             <flux:label>{{ __('Tipo de Cocina') }}</flux:label>

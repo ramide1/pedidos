@@ -76,3 +76,7 @@ select:focus[data-flux-control] {
     background-color: var(--bg-dark);
     color: var(--text-light);
 }
+
+.tabulator .tabulator-header {
+    padding-left: 0;
+}

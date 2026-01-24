@@ -15,7 +15,7 @@
             <flux:card class="flex flex-col gap-2">
                 <flux:text size="sm" class="text-zinc-500 uppercase font-bold tracking-wider">{{ __('Ventas Totales') }}</flux:text>
                 <div class="flex items-center justify-between">
-                    <flux:heading size="xl">${{ number_format($totalVentas, 2) }}</flux:heading>
+                    <flux:heading size="xl">$ {{ number_format($totalVentas, 2) }}</flux:heading>
                     <flux:icon name="banknotes" class="size-8 text-green-500" />
                 </div>
             </flux:card>

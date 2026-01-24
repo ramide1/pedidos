@@ -69,8 +69,8 @@ class CategoriaProductoController extends Controller
             'nombre' => 'required|string|max:255',
             'activo' => 'boolean',
         ]);
-        if (!$categoria->restaurante()) abort(404, __('Restaurante no encontrado'));
-        if (!$categoria->restaurante()->users()->where('users.id', $user_id)->exists()) abort(403, __('No tienes permiso para crear categorías en este restaurante'));
+        if (!$categoria->restaurante) abort(404, __('Restaurante no encontrado'));
+        if (!$categoria->restaurante->users()->where('users.id', $user_id)->exists()) abort(403, __('No tienes permiso para crear categorías en este restaurante'));
         $new_restaurante = Restaurante::where('id', $validated['restaurante_id'])->first();
         if (!$new_restaurante) abort(404, __('Restaurante no encontrado'));
         if (!$new_restaurante->users()->where('users.id', $user_id)->exists()) abort(403, __('No tienes permiso para crear categorías en este restaurante'));

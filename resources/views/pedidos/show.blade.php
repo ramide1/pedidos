@@ -25,7 +25,7 @@
                                 <flux:table.cell>{{ $item->producto->nombre ?? 'N/A' }}</flux:table.cell>
                                 <flux:table.cell>{{ $item->cantidad }}</flux:table.cell>
                                 <flux:table.cell>${{ number_format($item->precio, 2) }}</flux:table.cell>
-                                <flux:table.cell class="text-right font-medium">${{ number_format($item->subtotal, 2) }}</flux:table.cell>
+                                <flux:table.cell class="text-right font-medium">${{ number_format(($item->cantidad * $item->precio), 2) }}</flux:table.cell>
                             </flux:table.row>
                             @endforeach
                         </flux:table.rows>
@@ -39,7 +39,7 @@
                     <div class="space-y-2">
                         <div class="flex justify-between text-sm">
                             <span class="text-zinc-500">{{ __('Subtotal') }}</span>
-                            <span>${{ number_format($pedido->subtotal, 2) }}</span>
+                            <span>${{ number_format($item->cantidad * $item->precio, 2) }}</span>
                         </div>
                         <div class="flex justify-between text-sm">
                             <span class="text-zinc-500">{{ __('Envío') }}</span>

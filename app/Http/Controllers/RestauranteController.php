@@ -61,7 +61,7 @@ class RestauranteController extends Controller
         if (!$user->admin) return redirect()->route('home');
         if (!$restaurante->users()->where('user_id', $user_id)->exists()) abort(403, __('No tienes permiso para editar este restaurante.'));
         $users = User::all();
-        $selectedUserIds = $restaurante->users()->pluck('id')->toArray();
+        $selectedUserIds = $restaurante->users()->pluck('users.id')->toArray();
         return view('restaurantes.edit', compact('restaurante', 'users', 'selectedUserIds'));
     }
 

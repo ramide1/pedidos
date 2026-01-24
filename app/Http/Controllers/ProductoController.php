@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use App\Models\Restaurante;
+use App\Models\CategoriaProducto;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +28,7 @@ class ProductoController extends Controller
         if (!$user) abort(403, __('No autenticado'));
         if (!$user->admin) return redirect()->route('home');
         $restaurantes = $user->restaurantes()->latest()->get();
-        $categorias = $user->restaurantes()->categorias()->latest()->get();
+        $categorias = CategoriaProducto::with('restaurante:id,nombre')->whereIn('restaurante_id', $user->restaurantes()->pluck('restaurantes.id'))->latest()->get();
         return view('productos.create', compact('restaurantes', 'categorias'));
     }
 
@@ -60,7 +61,7 @@ class ProductoController extends Controller
         if (!$user->admin) return redirect()->route('home');
         if (!$producto->restaurante->users()->where('users.id', $user_id)->exists()) abort(403, __('No tienes permiso para editar este producto'));
         $restaurantes = $user->restaurantes()->latest()->get();
-        $categorias = $user->restaurantes()->categorias()->latest()->get();
+        $categorias = CategoriaProducto::with('restaurante:id,nombre')->whereIn('restaurante_id', $user->restaurantes()->pluck('restaurantes.id'))->latest()->get();
         return view('productos.edit', compact('producto', 'restaurantes', 'categorias'));
     }
 
@@ -103,9 +104,9 @@ class ProductoController extends Controller
         if (!$user) abort(403, __('No autenticado'));
         if (!$user->admin) return redirect()->route('home');
         if (!$producto->restaurante->users()->where('users.id', $user_id)->exists()) abort(403, __('No tienes permiso para duplicar este producto'));
-        $newProducto = $producto->replicate();
-        $newProducto->nombre = $newProducto->nombre . __(' (Copia)');
-        $newProducto->save();
+        $new_producto = $producto->replicate();
+        $new_producto->nombre = $new_producto->nombre . __(' (Copia)');
+        $new_producto->save();
         return redirect()->route('productos.index')->with('success', __('Producto duplicado con éxito.'));
     }
 }
