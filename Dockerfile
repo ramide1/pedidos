@@ -6,7 +6,8 @@ RUN install-php-extensions \
 	gd \
 	intl \
 	zip \
-	bcmath
+	bcmath \
+	pdo_pgsql
 COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 RUN sed -i 's/^memory_limit = -1/memory_limit = 4G/' "$PHP_INI_DIR/php.ini"
