@@ -1,0 +1,5 @@
+name: pedidos
+app_id: da_2yGI9trU0JQV
+owner: ramide1
+package: .
+kind: wasmer.io/App.v0
