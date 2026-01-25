@@ -1,6 +1,6 @@
 FROM dunglas/frankenphp:php8.5-alpine
 RUN apk update
-RUN apk add --no-cache nodejs-lts
+RUN apk add --no-cache nodejs-lts npm
 RUN install-php-extensions \
 	pdo_mysql \
 	gd \
