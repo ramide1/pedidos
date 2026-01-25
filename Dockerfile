@@ -20,6 +20,6 @@ ARG USER=appuser
 RUN \
 	adduser -D ${USER}; \
 	setcap -r /usr/local/bin/frankenphp; \
-	chown -R ${USER}:${USER} /config/caddy /data/caddy
+	chown -R ${USER}:${USER} /config/caddy /data/caddy /app
 USER ${USER}
 CMD ["frankenphp", "php-server", "--root=/app/public", "--listen=:8080"]
