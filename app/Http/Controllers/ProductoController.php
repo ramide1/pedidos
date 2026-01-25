@@ -21,6 +21,11 @@ class ProductoController extends Controller
         return view('productos.index', compact('productos'));
     }
 
+    public function show()
+    {
+        return redirect()->route('home');
+    }
+
     public function create()
     {
         $user_id = Auth::id();

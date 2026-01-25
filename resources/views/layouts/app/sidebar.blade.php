@@ -10,7 +10,7 @@
                 {{ __('Inicio') }}
             </flux:sidebar.item>
             @auth
-            @if(auth()->user()->admin || auth()->user()->restaurantes()->exists())
+            @if(auth()->user()->admin)
             <flux:sidebar.item icon="chart-bar" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                 {{ __('Panel de Gestión') }}
             </flux:sidebar.item>
@@ -19,14 +19,11 @@
         </flux:sidebar.group>
 
         @auth
-        @if(auth()->user()->admin || auth()->user()->restaurantes()->exists())
+        @if(auth()->user()->admin)
         <flux:sidebar.group :heading="__('Gestión')" class="grid">
-            @if(auth()->user()->admin)
             <flux:sidebar.item icon="building-storefront" :href="route('restaurantes.index')" :current="request()->routeIs('restaurantes.*')" wire:navigate>
                 {{ __('Restaurantes') }}
             </flux:sidebar.item>
-            @endif
-
             <flux:sidebar.item icon="rectangle-stack" :href="route('categorias.index')" :current="request()->routeIs('categorias.*')" wire:navigate>
                 {{ __('Categorías') }}
             </flux:sidebar.item>

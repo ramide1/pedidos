@@ -86,7 +86,7 @@
                         {{ __('Tu Pedido') }}
                     </flux:heading>
 
-                    <form action="{{ route('public.pedidos.store') }}" method="POST" id="order-form" class="space-y-4">
+                    <form action="{{ route('pedidos.store') }}" method="POST" id="order-form" class="space-y-4">
                         @csrf
                         <input type="hidden" name="restaurante_id" value="{{ $restaurante->id }}">
 
@@ -139,12 +139,12 @@
 
     <script>
         let cart = [];
+        const container = document.getElementById('cart-items');
+        const totalEl = document.getElementById('cart-total');
+        const emptyMsg = document.getElementById('empty-cart-msg');
+        const submitBtn = document.getElementById('submit-btn');
 
         const renderCart = () => {
-            const container = document.getElementById('cart-items');
-            const totalEl = document.getElementById('cart-total');
-            const emptyMsg = document.getElementById('empty-cart-msg');
-            const submitBtn = document.getElementById('submit-btn');
 
             if (!container) return;
 

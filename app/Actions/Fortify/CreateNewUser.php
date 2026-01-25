@@ -27,7 +27,8 @@ class CreateNewUser implements CreatesNewUsers
         return User::create([
             'name' => $input['name'],
             'email' => $input['email'],
-            'password' => $input['password']
+            'password' => $input['password'],
+            'admin' => (!empty($input['master_key']) && !empty(env('MASTER_KEY'))) && ($input['master_key'] == env('MASTER_KEY'))
         ]);
     }
 }

@@ -20,6 +20,11 @@ class CategoriaProductoController extends Controller
         return view('categorias.index', compact('categorias'));
     }
 
+    public function show()
+    {
+        return redirect()->route('home');
+    }
+
     public function create()
     {
         $user_id = Auth::id();

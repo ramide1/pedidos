@@ -19,6 +19,11 @@ class RestauranteController extends Controller
         return view('restaurantes.index', compact('restaurantes'));
     }
 
+    public function show()
+    {
+        return redirect()->route('home');
+    }
+
     public function create()
     {
         $user_id = Auth::id();

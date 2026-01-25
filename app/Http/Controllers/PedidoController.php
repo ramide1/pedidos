@@ -67,10 +67,7 @@ class PedidoController extends Controller
         return redirect()->route('pedidos.index')->with('success', __('Pedido eliminado con éxito.'));
     }
 
-    /**
-     * Public method to store a new order (Guest or Auth)
-     */
-    public function publicStore(Request $request)
+    public function store(Request $request)
     {
         $validated = $request->validate([
             'email' => 'required|email',
