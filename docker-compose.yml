@@ -6,9 +6,9 @@ services:
     restart: unless-stopped
     container_name: pedidos
     ports:
-      - "${APPPORT}:80/tcp"
+      - "${APPPORT}:8080/tcp"
     environment:
-      APPPORT: "80"
+      APPPORT: "8080"
       APP_NAME: "${APP_NAME}"
       APP_ENV: "${APP_ENV}"
       APP_KEY: "${APP_KEY}"

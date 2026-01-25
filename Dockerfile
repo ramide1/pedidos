@@ -16,4 +16,4 @@ COPY . .
 RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 RUN npm install
 RUN npm run build
-CMD ["frankenphp", "php-server", "--root=/app/public", "--listen=:80"]
+CMD ["frankenphp", "php-server", "--root=/app/public", "--listen=:8080"]
