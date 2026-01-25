@@ -16,4 +16,10 @@ COPY . .
 RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 RUN npm install
 RUN npm run build
+ARG USER=appuser
+RUN \
+	adduser -D ${USER}; \
+	setcap -r /usr/local/bin/frankenphp; \
+	chown -R ${USER}:${USER} /config/caddy /data/caddy
+USER ${USER}
 CMD ["frankenphp", "php-server", "--root=/app/public", "--listen=:8080"]
