@@ -26,11 +26,15 @@ class DashboardController extends Controller
             $totalVentas = Pedido::whereIn('restaurante_id', $restaurante_id)->sum('total');
             $totalProductos = Producto::whereIn('restaurante_id', $restaurante_id)->count();
             $pedidosPorMes = Pedido::whereIn('restaurante_id', $restaurante_id)
-                ->select(DB::raw('COUNT(*) as count'), DB::raw("DATE_FORMAT(created_at, '%Y-%m') as month"))
-                ->groupBy('month')
-                ->orderBy('month', 'desc')
-                ->take(6)
                 ->get()
+                ->groupBy(function ($pedido) {
+                    return $pedido->created_at->format('Y-m');
+                })
+                ->map(function ($group) {
+                    return count($group);
+                })
+                ->sortKeysDesc()
+                ->take(6)
                 ->reverse();
             $userRestaurantesCount = $restaurantes->count();
         }
