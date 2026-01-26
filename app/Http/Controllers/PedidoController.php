@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Pedido;
 use App\Models\Producto;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,41 +11,27 @@ class PedidoController extends Controller
 {
     public function index()
     {
-        $user_id = Auth::id();
-        $user = User::where('id', $user_id)->first();
-        if (!$user) abort(403, __('No autenticado'));
-        if (!$user->admin) return redirect()->route('home');
-        $pedidos = Pedido::with('restaurante:id,nombre')->whereIn('restaurante_id', $user->restaurantes()->pluck('restaurantes.id'))->latest()->get();
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $pedidos = Pedido::with('restaurante:id,nombre')->whereIn('restaurante_id', $user->restaurantes()->pluck('restaurantes.id'))->latest()->paginate(20);
         return view('pedidos.index', compact('pedidos'));
     }
 
     public function show(Pedido $pedido)
     {
-        $user_id = Auth::id();
-        $user = User::where('id', $user_id)->first();
-        if (!$user) abort(403, __('No autenticado'));
-        if (!$user->admin) return redirect()->route('home');
         $pedido->load(['restaurante', 'items.producto']);
         return view('pedidos.show', compact('pedido'));
     }
 
     public function edit(Pedido $pedido)
     {
-        $user_id = Auth::id();
-        $user = User::where('id', $user_id)->first();
-        if (!$user) abort(403, __('No autenticado'));
-        if (!$user->admin) return redirect()->route('home');
-        if (!$pedido->restaurante->users()->where('users.id', $user_id)->exists()) abort(403, __('No tienes permiso para editar este pedido'));
+        if (!$pedido->restaurante->users()->where('users.id', Auth::id())->exists()) abort(403, __('No tienes permiso para editar este pedido'));
         return view('pedidos.edit', compact('pedido'));
     }
 
     public function update(Request $request, Pedido $pedido)
     {
-        $user_id = Auth::id();
-        $user = User::where('id', $user_id)->first();
-        if (!$user) abort(403, __('No autenticado'));
-        if (!$user->admin) return redirect()->route('home');
-        if (!$pedido->restaurante->users()->where('users.id', $user_id)->exists()) abort(403, __('No tienes permiso para editar este pedido'));
+        if (!$pedido->restaurante->users()->where('users.id', Auth::id())->exists()) abort(403, __('No tienes permiso para editar este pedido'));
         $validated = $request->validate([
             'estado' => 'required|in:pendiente,confirmado,en_preparacion,en_camino,entregado,cancelado',
             'pago_confirmado' => 'boolean',
@@ -58,11 +43,7 @@ class PedidoController extends Controller
 
     public function destroy(Pedido $pedido)
     {
-        $user_id = Auth::id();
-        $user = User::where('id', $user_id)->first();
-        if (!$user) abort(403, __('No autenticado'));
-        if (!$user->admin) return redirect()->route('home');
-        if (!$pedido->restaurante->users()->where('users.id', $user_id)->exists()) abort(403, __('No tienes permiso para eliminar este pedido'));
+        if (!$pedido->restaurante->users()->where('users.id', Auth::id())->exists()) abort(403, __('No tienes permiso para eliminar este pedido'));
         $pedido->delete();
         return redirect()->route('pedidos.index')->with('success', __('Pedido eliminado con éxito.'));
     }
@@ -113,5 +94,12 @@ class PedidoController extends Controller
             $pedido->items()->create($item);
         }
         return redirect()->route('home')->with('success', __('¡Pedido #' . $pedido->codigo . ' realizado con éxito! El restaurante lo gestionará pronto.'));
+    }
+
+    public function markAsPaid(Pedido $pedido)
+    {
+        if (!$pedido->restaurante->users()->where('users.id', Auth::id())->exists()) abort(403, __('No tienes permiso para marcar este pedido como pagado'));
+        $pedido->update(['pago_confirmado' => true]);
+        return redirect()->route('pedidos.index')->with('success', __('Pedido marcado como pagado con éxito.'));
     }
 }

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 
-class UserApiController extends Controller
+class AppApiController extends Controller
 {
     public function login(Request $request)
     {
@@ -56,10 +56,9 @@ class UserApiController extends Controller
         exit;
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
         try {
-            if (!$request->user()) throw new \Exception('No hay usuario autenticado.');
             Auth::logout();
             $respuesta['mensaje'] = __('Usuario cerró sesión con éxito.');
             $respuesta['error'] = false;
@@ -74,7 +73,6 @@ class UserApiController extends Controller
     public function logoutAll(Request $request)
     {
         try {
-            if (!$request->user()) throw new \Exception('No hay usuario autenticado.');
             Auth::logoutOtherDevices($request->user()->password);
             $respuesta['mensaje'] = __('Usuario cerró sesiones activas con éxito.');
             $respuesta['error'] = false;
@@ -89,7 +87,6 @@ class UserApiController extends Controller
     public function user(Request $request)
     {
         try {
-            if (!$request->user()) throw new \Exception('No hay usuario autenticado.');
             $respuesta['user'] = $request->user();
             $respuesta['mensaje'] = __('Usuario obtenido con éxito.');
             $respuesta['error'] = false;

@@ -1,7 +1,5 @@
 import Swal from 'sweetalert2';
-import { Tabulator, FormatModule, SortModule } from 'tabulator-tables';
-
-Tabulator.registerModule([FormatModule, SortModule]);
+import { TabulatorFull as Tabulator } from 'tabulator-tables';
 
 window.Swal = Swal;
 window.Tabulator = Tabulator;
@@ -15,6 +13,21 @@ window.confirmDelete = (form) => {
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) form.submit();
+    });
+};
+
+window.confirmMarkAsPaid = (form) => {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¿Marcar como pagado?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, marcar como pagado',
         cancelButtonText: 'Cancelar'
     }).then((result) => {
         if (result.isConfirmed) form.submit();

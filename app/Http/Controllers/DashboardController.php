@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Pedido;
 use App\Models\Producto;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -12,10 +11,8 @@ class DashboardController extends Controller
 {
     public function __invoke()
     {
-        $user_id = Auth::id();
-        $user = User::where('id', $user_id)->first();
-        if (!$user) abort(403, __('No autenticado'));
-        if (!$user->admin) return redirect()->route('home');
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
         $restaurantes = $user->restaurantes()->latest()->get();
         $restaurante_id = $restaurantes->pluck('id');
         if ($restaurante_id->isEmpty()) {
@@ -25,16 +22,20 @@ class DashboardController extends Controller
             $totalPedidos = Pedido::whereIn('restaurante_id', $restaurante_id)->count();
             $totalVentas = Pedido::whereIn('restaurante_id', $restaurante_id)->sum('total');
             $totalProductos = Producto::whereIn('restaurante_id', $restaurante_id)->count();
+            $tipo_conexion = env('DB_CONNECTION', 'sqlite');
+            $formato_fecha = match ($tipo_conexion) {
+                'mysql' => "DATE_FORMAT(created_at, '%Y-%m')",
+                'pgsql' => "TO_CHAR(created_at, 'YYYY-MM')",
+                'sqlite' => "strftime('%Y-%m', created_at)",
+                'sqlsrv' => "FORMAT(created_at, 'yyyy-MM')",
+                default => "CONCAT(YEAR(created_at), '-', LPAD(MONTH(created_at), 2, '0'))"
+            };
             $pedidosPorMes = Pedido::whereIn('restaurante_id', $restaurante_id)
+                ->selectRaw("{$formato_fecha} as month, COUNT(*) as count")
+                ->groupBy(DB::raw($formato_fecha))
+                ->orderByDesc('month')
+                ->limit(6)
                 ->get()
-                ->groupBy(function ($pedido) {
-                    return $pedido->created_at->format('Y-m');
-                })
-                ->map(function ($group) {
-                    return count($group);
-                })
-                ->sortKeysDesc()
-                ->take(6)
                 ->reverse();
             $userRestaurantesCount = $restaurantes->count();
         }

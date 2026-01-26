@@ -1,6 +1,4 @@
-import {
-    defineConfig
-} from 'vite';
+import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import tailwindcss from "@tailwindcss/vite";
 
@@ -22,9 +20,9 @@ export default defineConfig({
         rollupOptions: {
             output: {
                 manualChunks: {
-                    tabulator: ['tabulator-tables'],
-                    swal: ['sweetalert2'],
-                },
+                    'tabulator-tables': ['tabulator-tables'],
+                    'sweetalert2': ['sweetalert2']
+                }
             },
         },
     },

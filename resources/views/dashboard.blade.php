@@ -2,7 +2,6 @@
     <div class="space-y-6">
         <flux:heading size="xl" level="1">{{ __('Dashboard') }}</flux:heading>
 
-        <!-- Stats Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <flux:card class="flex flex-col gap-2">
                 <flux:text size="sm" class="text-zinc-500 uppercase font-bold tracking-wider">{{ __('Total Pedidos') }}</flux:text>
@@ -29,7 +28,6 @@
             </flux:card>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <!-- Simple Orders Chart -->
             <flux:card>
                 <flux:heading level="3" class="mb-6">{{ __('Pedidos por Mes') }}</flux:heading>
                 <div class="flex gap-4 h-48 pt-4">
@@ -54,7 +52,6 @@
                 </div>
             </flux:card>
 
-            <!-- Shortcuts / User Info -->
             <flux:card class="space-y-4">
                 <flux:heading level="3">{{ __('Gestión Rápida') }}</flux:heading>
                 <div class="grid grid-cols-2 gap-4">

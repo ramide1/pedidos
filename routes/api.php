@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserApiController;
+use App\Http\Controllers\AppApiController;
 use App\Http\Controllers\PedidoController;
 
-Route::controller(UserApiController::class)->group(function () {
+Route::controller(AppApiController::class)->group(function () {
     //post
     Route::post('/login', 'login');
     Route::post('/register', 'register');

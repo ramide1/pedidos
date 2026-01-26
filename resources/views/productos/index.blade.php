@@ -6,7 +6,8 @@
         </div>
 
         <flux:card class="p-0 overflow-hidden">
-            <div id="productos-table" class="w-full" data-table-data='{!! json_encode($productos) !!}'></div>
+            <div id="productos-table" class="w-full" data-table-data='{!! json_encode($productos->toArray()["data"]) !!}'></div>
+            {{ $productos->links() }}
         </flux:card>
     </div>
 
@@ -107,7 +108,9 @@
                         `;
                         }
                     },
-                ]
+                ],
+                movableColumns: true,
+                movableRows: true
             });
         });
     </script>

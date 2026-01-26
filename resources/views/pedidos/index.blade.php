@@ -5,7 +5,8 @@
         </div>
 
         <flux:card class="p-0 overflow-hidden">
-            <div id="pedidos-table" class="w-full text-sm" data-table-data='{!! json_encode($pedidos) !!}'></div>
+            <div id="pedidos-table" class="w-full text-sm" data-table-data='{!! json_encode($pedidos->toArray()["data"]) !!}'></div>
+            {{ $pedidos->links() }}
         </flux:card>
     </div>
 
@@ -82,6 +83,16 @@
                         }
                     },
                     {
+                        title: "{{ __('Pagado') }}",
+                        field: "pago_confirmado",
+                        hozAlign: "center",
+                        formatter: "tickCross",
+                        formatterParams: {
+                            tickElement: `<span class="text-green-500">✓</span>`,
+                            crossElement: `<span class="text-red-500">✗</span>`
+                        }
+                    },
+                    {
                         title: "{{ __('Fecha') }}",
                         field: "created_at",
                         sorter: "datetime",
@@ -106,6 +117,7 @@
                             const showUrl = `{{ route('pedidos.show', ':id') }}`.replace(':id', id);
                             const editUrl = `{{ route('pedidos.edit', ':id') }}`.replace(':id', id);
                             const destroyUrl = `{{ route('pedidos.destroy', ':id') }}`.replace(':id', id);
+                            const markAsPaidUrl = `{{ route('pedidos.markAsPaid', ':id') }}`.replace(':id', id);
                             const csrf = `{{ csrf_token() }}`;
 
                             return `
@@ -131,11 +143,23 @@
                                     </svg>
                                 </button>
                             </form>
+
+                            <form action="${markAsPaidUrl}" method="POST" class="inline">
+                                <input type="hidden" name="_token" value="${csrf}">
+                                <input type="hidden" name="_method" value="PUT">
+                                <button type="button" title="Marcar como pagado" class="p-1 hover:bg-green-50 dark:hover:bg-green-900/20 rounded" onclick="confirmMarkAsPaid(this.closest('form'))">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-green-500">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                    </svg>
+                                </button>
+                            </form>
                         </div>
                         `;
                         }
                     },
-                ]
+                ],
+                movableColumns: true,
+                movableRows: true
             });
         });
     </script>

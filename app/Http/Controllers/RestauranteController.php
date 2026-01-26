@@ -11,11 +11,9 @@ class RestauranteController extends Controller
 {
     public function index()
     {
-        $user_id = Auth::id();
-        $user = User::where('id', $user_id)->first();
-        if (!$user) abort(403, __('No autenticado'));
-        if (!$user->admin) return redirect()->route('home');
-        $restaurantes = $user->restaurantes()->latest()->get();
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $restaurantes = $user->restaurantes()->latest()->paginate(20);
         return view('restaurantes.index', compact('restaurantes'));
     }
 
@@ -26,21 +24,13 @@ class RestauranteController extends Controller
 
     public function create()
     {
-        $user_id = Auth::id();
-        $user = User::where('id', $user_id)->first();
-        if (!$user) abort(403, __('No autenticado'));
-        if (!$user->admin) return redirect()->route('home');
         $users = User::all();
-        $selectedUserIds = [$user_id];
+        $selectedUserIds = [Auth::id()];
         return view('restaurantes.create', compact('users', 'selectedUserIds'));
     }
 
     public function store(Request $request)
     {
-        $user_id = Auth::id();
-        $user = User::where('id', $user_id)->first();
-        if (!$user) abort(403, __('No autenticado'));
-        if (!$user->admin) return redirect()->route('home');
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
             'direccion' => 'required|string|max:255',
@@ -60,11 +50,7 @@ class RestauranteController extends Controller
 
     public function edit(Restaurante $restaurante)
     {
-        $user_id = Auth::id();
-        $user = User::where('id', $user_id)->first();
-        if (!$user) abort(403, __('No autenticado'));
-        if (!$user->admin) return redirect()->route('home');
-        if (!$restaurante->users()->where('user_id', $user_id)->exists()) abort(403, __('No tienes permiso para editar este restaurante.'));
+        if (!$restaurante->users()->where('user_id', Auth::id())->exists()) abort(403, __('No tienes permiso para editar este restaurante.'));
         $users = User::all();
         $selectedUserIds = $restaurante->users()->pluck('users.id')->toArray();
         return view('restaurantes.edit', compact('restaurante', 'users', 'selectedUserIds'));
@@ -72,11 +58,7 @@ class RestauranteController extends Controller
 
     public function update(Request $request, Restaurante $restaurante)
     {
-        $user_id = Auth::id();
-        $user = User::where('id', $user_id)->first();
-        if (!$user) abort(403, __('No autenticado'));
-        if (!$user->admin) return redirect()->route('home');
-        if (!$restaurante->users()->where('user_id', $user_id)->exists()) abort(403, __('No tienes permiso para editar este restaurante.'));
+        if (!$restaurante->users()->where('user_id', Auth::id())->exists()) abort(403, __('No tienes permiso para editar este restaurante.'));
         $rules = [
             'nombre' => 'required|string|max:255',
             'direccion' => 'required|string|max:255',
@@ -97,22 +79,14 @@ class RestauranteController extends Controller
 
     public function destroy(Restaurante $restaurante)
     {
-        $user_id = Auth::id();
-        $user = User::where('id', $user_id)->first();
-        if (!$user) abort(403, __('No autenticado'));
-        if (!$user->admin) return redirect()->route('home');
-        if (!$restaurante->users()->where('user_id', $user_id)->exists()) abort(403, __('No tienes permiso para eliminar este restaurante.'));
+        if (!$restaurante->users()->where('user_id', Auth::id())->exists()) abort(403, __('No tienes permiso para eliminar este restaurante.'));
         $restaurante->delete();
         return redirect()->route('restaurantes.index')->with('success', __('Restaurante eliminado con éxito.'));
     }
 
     public function duplicate(Restaurante $restaurante)
     {
-        $user_id = Auth::id();
-        $user = User::where('id', $user_id)->first();
-        if (!$user) abort(403, __('No autenticado'));
-        if (!$user->admin) return redirect()->route('home');
-        if (!$restaurante->users()->where('user_id', $user_id)->exists()) abort(403, __('No tienes permiso para duplicar este restaurante.'));
+        if (!$restaurante->users()->where('user_id', Auth::id())->exists()) abort(403, __('No tienes permiso para duplicar este restaurante.'));
         $new_restaurante = $restaurante->replicate();
         $new_restaurante->nombre = $new_restaurante->nombre . __(' (Copia)');
         $new_restaurante->save();

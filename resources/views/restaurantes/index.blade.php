@@ -6,7 +6,8 @@
         </div>
 
         <flux:card class="p-0 overflow-hidden">
-            <div id="restaurantes-table" class="w-full" data-table-data='{!! json_encode($restaurantes) !!}'></div>
+            <div id="restaurantes-table" class="w-full" data-table-data='{!! json_encode($restaurantes->toArray()["data"]) !!}'></div>
+            {{ $restaurantes->links() }}
         </flux:card>
     </div>
 
@@ -109,7 +110,9 @@
                         `;
                         }
                     },
-                ]
+                ],
+                movableColumns: true,
+                movableRows: true
             });
         });
     </script>
