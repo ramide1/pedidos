@@ -9,6 +9,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 use App\Models\Sanctum\PersonalAccessToken;
 use Laravel\Sanctum\Sanctum;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->configureDefaults();
         Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
+        if (app()->isProduction()) URL::forceScheme('https');
     }
 
     protected function configureDefaults(): void
