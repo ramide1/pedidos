@@ -14,7 +14,7 @@ class ProductoController extends Controller
     {
         /** @var \App\Models\User $user */
         $user = Auth::user();
-        $productos = Producto::with('restaurante:id,nombre')->whereIn('restaurante_id', $user->restaurantes()->pluck('restaurantes.id'))->latest()->paginate(20);
+        $productos = Producto::with(['restaurante:id,nombre', 'categoria:id,nombre'])->whereIn('restaurante_id', $user->restaurantes()->pluck('restaurantes.id'))->latest()->paginate(20);
         return view('productos.index', compact('productos'));
     }
 
