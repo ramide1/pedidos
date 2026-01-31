@@ -1,6 +1,5 @@
 FROM dunglas/frankenphp:php8.5-alpine
 RUN apk update
-RUN apk add --no-cache nodejs-lts npm
 RUN install-php-extensions \
 	pdo_mysql \
 	gd \
@@ -10,13 +9,15 @@ RUN install-php-extensions \
 	pdo_pgsql
 COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
-RUN sed -i 's/^memory_limit = -1/memory_limit = 4G/' "$PHP_INI_DIR/php.ini"
+RUN sed -i 's/^memory_limit = 128M/memory_limit = 4G/' "$PHP_INI_DIR/php.ini"
 RUN sed -i 's/^; max_input_vars = 1000/max_input_vars = 5000/' "$PHP_INI_DIR/php.ini"
+RUN curl -fsSL https://bun.sh/install | bash
+ENV PATH="/root/.bun/bin:$PATH"
 WORKDIR /app
 COPY . .
 RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
-RUN npm install
-RUN npm run build
+RUN bun install
+RUN bun run build
 ARG USER=appuser
 RUN \
 	adduser -D ${USER}; \

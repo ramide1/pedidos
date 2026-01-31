@@ -112,6 +112,8 @@
                 movableColumns: true,
                 movableRows: true
             });
+        }, {
+            once: true
         });
     </script>
 </x-layouts::app>

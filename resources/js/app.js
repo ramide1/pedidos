@@ -60,4 +60,4 @@ document.addEventListener('livewire:navigated', () => {
             timerProgressBar: true,
         });
     }
-});
+}, { once: true });
