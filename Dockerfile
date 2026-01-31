@@ -11,7 +11,7 @@ COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 RUN sed -i 's/^memory_limit = 128M/memory_limit = 4G/' "$PHP_INI_DIR/php.ini"
 RUN sed -i 's/^; max_input_vars = 1000/max_input_vars = 5000/' "$PHP_INI_DIR/php.ini"
-RUN curl -fsSL https://bun.sh/install | bash
+RUN curl -fsSL https://bun.sh/install | sh
 ENV PATH="/root/.bun/bin:$PATH"
 WORKDIR /app
 COPY . .
