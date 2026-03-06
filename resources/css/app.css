@@ -3,6 +3,7 @@
 @import 'tabulator-tables/dist/css/tabulator_modern.min.css';
 @import './fonts.css';
 @import 'animate.css';
+@import 'choices.js/public/assets/styles/choices.css';
 
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';

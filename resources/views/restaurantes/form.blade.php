@@ -53,7 +53,6 @@
         </flux:field>
     </div>
 
-    @if(auth()->user()->admin)
     <flux:field>
         <flux:label>{{ __('Administradores del Restaurante') }}</flux:label>
         <flux:select name="user_ids[]" multiple>
@@ -65,7 +64,6 @@
         </flux:select>
         <flux:error name="user_ids" />
     </flux:field>
-    @endif
 
     <flux:field>
         <flux:label>{{ __('Notas') }}</flux:label>
@@ -73,3 +71,12 @@
         <flux:error name="notas" />
     </flux:field>
 </div>
+<script>
+    document.addEventListener('livewire:navigated', () => {
+        const userSelector = document.getElementsByName('user_ids[]');
+        if (userSelector.length === 0) return;
+        new Choices(userSelector[0]);
+    }, {
+        once: true
+    });
+</script>

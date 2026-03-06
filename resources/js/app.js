@@ -1,8 +1,10 @@
 import Swal from 'sweetalert2';
 import { TabulatorFull as Tabulator } from 'tabulator-tables';
+import Choices from 'choices.js'
 
 window.Swal = Swal;
 window.Tabulator = Tabulator;
+window.Choices = Choices;
 
 window.confirmDelete = (form) => {
     Swal.fire({
