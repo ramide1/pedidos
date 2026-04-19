@@ -75,7 +75,14 @@
     document.addEventListener('livewire:navigated', () => {
         const userSelector = document.getElementsByName('user_ids[]');
         if (userSelector.length === 0) return;
-        new Choices(userSelector[0]);
+        new Choices(userSelector[0], {
+            removeItemButton: true,
+            placeholderValue: 'Selecciona opciones',
+            searchPlaceholderValue: 'Escribe para buscar',
+            noResultsText: 'No se encontraron resultados',
+            noChoicesText: 'No hay opciones disponibles',
+            itemSelectText: 'Presiona para seleccionar',
+        });
     }, {
         once: true
     });

@@ -73,7 +73,14 @@ select:focus[data-flux-control] {
 .dark .tabulator .tabulator-row,
 .dark .tabulator .tabulator-table,
 .dark .tabulator .tabulator-footer,
-.dark .tabulator .tabulator-paginator {
+.dark .tabulator .tabulator-paginator,
+.dark .choices__inner,
+.dark .choices__input,
+.dark .choices__list,
+.dark .choices__list--dropdown .choices__item--selectable.is-selected,
+.dark .choices__list[aria-expanded] .choices__item--selectable.is-selected,
+.dark .choices__list--dropdown .choices__item--selectable.is-highlighted,
+.dark .choices__list[aria-expanded] .choices__item--selectable.is-highlighted {
     background-color: var(--bg-dark);
     color: var(--text-light);
 }

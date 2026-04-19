@@ -21,3 +21,9 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+.vercel
+.env*.local
+api
+dist
+.vercelignore
+vercel.json

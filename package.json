@@ -7,21 +7,21 @@
         "dev": "vite"
     },
     "dependencies": {
-        "@tailwindcss/vite": "^4.2.1",
+        "@tailwindcss/vite": "^4.2.2",
         "animate.css": "^4.1.1",
-        "autoprefixer": "^10.4.27",
-        "axios": "^1.13.6",
-        "choices.js": "^11.1.0",
+        "autoprefixer": "^10.5.0",
+        "axios": "^1.15.1",
+        "choices.js": "^11.2.2",
         "concurrently": "^9.2.1",
-        "laravel-vite-plugin": "^2.1.0",
-        "sweetalert2": "^11.26.21",
-        "tabulator-tables": "^6.3.1",
-        "tailwindcss": "^4.2.1",
-        "vite": "^7.3.1"
+        "laravel-vite-plugin": "^3.0.1",
+        "sweetalert2": "^11.26.24",
+        "tabulator-tables": "^6.4.0",
+        "tailwindcss": "^4.2.2",
+        "vite": "^8.0.8"
     },
     "optionalDependencies": {
-        "@rollup/rollup-linux-x64-gnu": "4.59.0",
-        "@tailwindcss/oxide-linux-x64-gnu": "^4.2.1",
-        "lightningcss-linux-x64-gnu": "^1.31.1"
+        "@rollup/rollup-linux-x64-gnu": "4.60.2",
+        "@tailwindcss/oxide-linux-x64-gnu": "^4.2.2",
+        "lightningcss-linux-x64-gnu": "^1.32.0"
     }
 }

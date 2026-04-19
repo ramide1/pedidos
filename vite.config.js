@@ -6,24 +6,24 @@ export default defineConfig({
     plugins: [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],
-            refresh: true,
+            refresh: true
         }),
-        tailwindcss(),
+        tailwindcss()
     ],
     server: {
         cors: true,
         watch: {
-            ignored: ['**/storage/framework/views/**'],
-        },
+            ignored: ['**/storage/framework/views/**']
+        }
     },
     build: {
         rollupOptions: {
             output: {
-                manualChunks: {
-                    'tabulator-tables': ['tabulator-tables'],
-                    'sweetalert2': ['sweetalert2']
+                manualChunks(id) {
+                    if (id.includes('tabulator-tables')) return 'tabulator-tables';
+                    if (id.includes('sweetalert2')) return 'sweetalert2';
                 }
-            },
-        },
-    },
+            }
+        }
+    }
 });
