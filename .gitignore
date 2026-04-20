@@ -24,6 +24,6 @@ yarn-error.log
 .vercel
 .env*.local
 api
-dist
 .vercelignore
 vercel.json
+server.php
