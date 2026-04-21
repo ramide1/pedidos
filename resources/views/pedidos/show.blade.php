@@ -31,7 +31,7 @@
                                 <flux:table.cell class="text-right font-medium">${{ number_format(($item->cantidad * $item->precio), 2) }}</flux:table.cell>
                             </flux:table.row>
                             @php
-                            $subtotal += number_format(($item->cantidad * $item->precio), 2);
+                            $subtotal += ($item->cantidad * $item->precio);
                             @endphp
                             @endforeach
                         </flux:table.rows>
