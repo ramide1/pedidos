@@ -1,10 +1,13 @@
 import Swal from 'sweetalert2';
 import { TabulatorFull as Tabulator } from 'tabulator-tables';
 import Choices from 'choices.js'
+import * as luxon from 'luxon';
 
 window.Swal = Swal;
 window.Tabulator = Tabulator;
 window.Choices = Choices;
+window.luxon = luxon;
+window.DateTime = luxon.DateTime;
 
 window.confirmDelete = (form) => {
     Swal.fire({

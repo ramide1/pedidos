@@ -25,7 +25,7 @@
                     <flux:text>{{ __('Comienza agregando tu primera categoría de productos.') }}</flux:text>
                 </div>
                 `,
-                layout: 'fitColumns',
+                layout: 'fitDataFill',
                 columns: [{
                         title: "{{ __('Restaurante') }}",
                         field: "restaurante.nombre",

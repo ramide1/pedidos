@@ -206,7 +206,6 @@
 
             let message = '*NUEVO PEDIDO* %0A%0A';
 
-            message += '*MIS DATOS*%0A';
             if (nombreCliente) message += `*Nombre:* ${nombreCliente}%0A`;
             if (emailCliente) message += `*Email:* ${emailCliente}%0A`;
             if (telefonoCliente) message += `*Teléfono:* ${telefonoCliente}%0A`;

@@ -25,7 +25,7 @@
                     <flux:text>{{ __('Comienza agregando tu primer restaurante.') }}</flux:text>
                 </div>
                 `,
-                layout: 'fitColumns',
+                layout: 'fitDataFill',
                 columns: [{
                         title: "{{ __('Nombre') }}",
                         field: "nombre",

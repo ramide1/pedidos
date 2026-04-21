@@ -24,7 +24,7 @@
                     <flux:text>{{ __('Los pedidos aparecerán aquí una vez que los clientes comiencen a comprar.') }}</flux:text>
                 </div>
                 `,
-                layout: 'fitColumns',
+                layout: 'fitDataFill',
                 paginationSize: 15,
                 initialSort: [{
                     column: "created_at",
