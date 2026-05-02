@@ -19,7 +19,7 @@
                         value="{{ request('search') }}"
                         class="flex-1"
                         icon="magnifying-glass" />
-                    <flux:button type="submit" variant="primary">{{ __('Buscar') }}</flux:button>
+                    <flux:button class="cursor-pointer" type="submit" variant="primary">{{ __('Buscar') }}</flux:button>
                 </form>
             </div>
 
@@ -82,7 +82,7 @@
                         <span>{{ number_format(4.5 + ($restaurante->pedidos_count % 5) / 10, 1) }}</span>
                         <span class="text-zinc-400 font-normal">({{ $restaurante->pedidos_count }} {{ __('pedidos') }})</span>
                     </flux:text>
-                    <flux:button variant="primary" size="sm">{{ __('Pedir ahora') }}</flux:button>
+                    <flux:button class="cursor-pointer" variant="primary" size="sm">{{ __('Pedir ahora') }}</flux:button>
                 </div>
             </div>
             </a>
@@ -95,7 +95,7 @@
             <flux:icon name="magnifying-glass" class="size-20 text-zinc-200" />
             <flux:heading level="3">{{ __('No encontramos lo que buscas') }}</flux:heading>
             <flux:text>{{ __('Prueba con otros términos o explora libremente.') }}</flux:text>
-            <flux:button href="{{ route('home') }}" variant="ghost">{{ __('Ver todos los restaurantes') }}</flux:button>
+            <flux:button class="cursor-pointer" href="{{ route('home') }}" variant="ghost">{{ __('Ver todos los restaurantes') }}</flux:button>
         </div>
         @endif
     </div>

@@ -2,7 +2,7 @@
     <div class="space-y-6">
         <div class="flex items-center justify-between">
             <flux:heading size="xl" level="1">{{ __('Restaurantes') }}</flux:heading>
-            <flux:button icon="plus" variant="primary" href="{{ route('restaurantes.create') }}">{{ __('Agregar Restaurante') }}</flux:button>
+            <flux:button class="cursor-pointer" icon="plus" variant="primary" href="{{ route('restaurantes.create') }}">{{ __('Agregar Restaurante') }}</flux:button>
         </div>
 
         <flux:card class="p-0 overflow-hidden">

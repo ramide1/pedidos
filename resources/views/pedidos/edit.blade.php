@@ -1,7 +1,7 @@
 <x-layouts::app :title="__('Editar Pedido')">
     <div class="max-w-2xl mx-auto space-y-6">
         <div class="flex items-center gap-4">
-            <flux:button href="{{ route('pedidos.index') }}" variant="ghost" icon="arrow-left" size="sm" />
+            <flux:button class="cursor-pointer" href="{{ route('pedidos.index') }}" variant="ghost" icon="arrow-left" size="sm" />
             <flux:heading size="xl" level="1">{{ __('Pedido') }} #{{ $pedido->codigo }}</flux:heading>
         </div>
 
@@ -37,8 +37,8 @@
                 </flux:field>
 
                 <div class="flex justify-end gap-2">
-                    <flux:button href="{{ route('pedidos.index') }}" variant="ghost">{{ __('Cancelar') }}</flux:button>
-                    <flux:button type="submit" variant="primary">{{ __('Actualizar Pedido') }}</flux:button>
+                    <flux:button class="cursor-pointer" href="{{ route('pedidos.index') }}" variant="ghost">{{ __('Cancelar') }}</flux:button>
+                    <flux:button class="cursor-pointer" type="submit" variant="primary">{{ __('Actualizar Pedido') }}</flux:button>
                 </div>
             </form>
         </flux:card>

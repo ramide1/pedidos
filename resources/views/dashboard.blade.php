@@ -55,19 +55,19 @@
             <flux:card class="space-y-4">
                 <flux:heading level="3">{{ __('Gestión Rápida') }}</flux:heading>
                 <div class="grid grid-cols-2 gap-4">
-                    <flux:button href="{{ route('restaurantes.create') }}" variant="ghost" class="flex flex-col items-center gap-2 py-6 h-auto">
+                    <flux:button href="{{ route('restaurantes.create') }}" variant="ghost" class="flex flex-col items-center gap-2 py-6 h-auto cursor-pointer">
                         <flux:icon name="plus" />
                         <span>{{ __('Nuevo Restaurante') }}</span>
                     </flux:button>
-                    <flux:button href="{{ route('categorias.create') }}" variant="ghost" class="flex flex-col items-center gap-2 py-6 h-auto">
+                    <flux:button href="{{ route('categorias.create') }}" variant="ghost" class="flex flex-col items-center gap-2 py-6 h-auto cursor-pointer">
                         <flux:icon name="plus" />
                         <span>{{ __('Nueva Categoría') }}</span>
                     </flux:button>
-                    <flux:button href="{{ route('productos.create') }}" variant="ghost" class="flex flex-col items-center gap-2 py-6 h-auto">
+                    <flux:button href="{{ route('productos.create') }}" variant="ghost" class="flex flex-col items-center gap-2 py-6 h-auto cursor-pointer">
                         <flux:icon name="plus" />
                         <span>{{ __('Nuevo Producto') }}</span>
                     </flux:button>
-                    <flux:button href="{{ route('pedidos.index') }}" variant="ghost" class="flex flex-col items-center gap-2 py-6 h-auto">
+                    <flux:button href="{{ route('pedidos.index') }}" variant="ghost" class="flex flex-col items-center gap-2 py-6 h-auto cursor-pointer">
                         <flux:icon name="eye" />
                         <span>{{ __('Ver Pedidos') }}</span>
                     </flux:button>

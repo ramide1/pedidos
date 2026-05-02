@@ -42,7 +42,7 @@
             <flux:checkbox name="remember" :label="__('Recordarme')" :checked="old('remember')" />
 
             <div class="flex items-center justify-end">
-                <flux:button variant="primary" type="submit" class="w-full" data-test="login-button">
+                <flux:button variant="primary" type="submit" class="w-full cursor-pointer" data-test="login-button">
                     {{ __('Iniciar Sesión') }}
                 </flux:button>
             </div>

@@ -103,7 +103,7 @@
         </flux:menu>
     </flux:dropdown>
     @else
-    <flux:button variant="ghost" size="sm" :href="route('login')" wire:navigate>{{ __('Acceder') }}</flux:button>
+    <flux:button class="cursor-pointer" variant="ghost" size="sm" :href="route('login')" wire:navigate>{{ __('Acceder') }}</flux:button>
     @endauth
 </flux:header>
 

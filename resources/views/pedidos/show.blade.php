@@ -2,10 +2,10 @@
     <div class="max-w-4xl mx-auto space-y-6">
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <flux:button href="{{ route('pedidos.index') }}" variant="ghost" icon="arrow-left" size="sm" />
+                <flux:button class="cursor-pointer" href="{{ route('pedidos.index') }}" variant="ghost" icon="arrow-left" size="sm" />
                 <flux:heading size="xl" level="1">{{ __('Pedido') }} #{{ $pedido->codigo }}</flux:heading>
             </div>
-            <flux:button href="{{ route('pedidos.edit', $pedido) }}" icon="pencil-square">{{ __('Editar') }}</flux:button>
+            <flux:button class="cursor-pointer" href="{{ route('pedidos.edit', $pedido) }}" icon="pencil-square">{{ __('Editar') }}</flux:button>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">

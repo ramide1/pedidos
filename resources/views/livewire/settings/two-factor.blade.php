@@ -26,6 +26,7 @@
                             icon="shield-exclamation"
                             icon:variant="outline"
                             wire:click="disable"
+                            class="cursor-pointer"
                         >
                             {{ __('Disable 2FA') }}
                         </flux:button>
@@ -46,6 +47,7 @@
                         icon="shield-check"
                         icon:variant="outline"
                         wire:click="enable"
+                        class="cursor-pointer"
                     >
                         {{ __('Enable 2FA') }}
                     </flux:button>
@@ -102,7 +104,7 @@
                     <div class="flex items-center space-x-3">
                         <flux:button
                             variant="outline"
-                            class="flex-1"
+                            class="flex-1 cursor-pointer"
                             wire:click="resetVerification"
                         >
                             {{ __('Back') }}
@@ -110,7 +112,7 @@
 
                         <flux:button
                             variant="primary"
-                            class="flex-1"
+                            class="flex-1 cursor-pointer"
                             wire:click="confirmTwoFactor"
                             x-bind:disabled="$wire.code.length < 6"
                         >
@@ -146,7 +148,7 @@
                     <flux:button
                         :disabled="$errors->has('setupData')"
                         variant="primary"
-                        class="w-full"
+                        class="w-full cursor-pointer"
                         wire:click="showVerificationIfNecessary"
                     >
                         {{ $this->modalConfig['buttonText'] }}
